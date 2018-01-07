@@ -13,3 +13,6 @@ buildNumber.properties
 .springBeans
 .settings
 bin/
+testdb.mv.db
+crudservice.log
+restdb.h2.mv.db
