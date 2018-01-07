@@ -1,5 +1,5 @@
 # CrudService
-Spring Based CRUD Rest Service using Service Registry, Cloud Config and Zipkin
+Spring Based CRUD Hateos Rest Service using Service Registry, Cloud Config and Zipkin
 
 ## Dependencies
 At least: Java 8 and Maven 3.5
@@ -24,3 +24,6 @@ docker build -t crudservice:latest . --build-arg JAR_FILE=./target/CrudService-0
 
 ## Docker run
 docker run --name crudservice -d -p 8002:8002 --link serviceregistry:serviceregistry -v /tmp:/tmp -e EUREKA_ZONE=$EUREKA_ZONE crudservice:latest
+
+## Link to H2 web console
+http://127.0.0.1:8002/h2
