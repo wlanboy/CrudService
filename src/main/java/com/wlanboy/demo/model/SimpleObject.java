@@ -14,13 +14,19 @@ import lombok.Setter;
 @Table(name = "SimpleObject")
 public class SimpleObject {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter public Long SIMPLE_ID;
-    
-    @Column(nullable = false, length = 60)
-    @Getter @Setter public String SIMPLE_NUMBER;
-    
-    @Column(nullable = false, length = 60)
-    @Getter @Setter public String SIMPLE_HASH;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter
+	@Setter
+	public Long SIMPLE_ID;
+
+	@Column(nullable = false, length = 60)
+	@Getter
+	@Setter
+	public String SIMPLE_NUMBER;
+
+	@Column(nullable = false, length = 60)
+	@Getter
+	@Setter
+	public String SIMPLE_HASH;
 }
