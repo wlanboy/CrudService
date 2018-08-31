@@ -50,7 +50,7 @@ public class HelloController {
     	
     	logger.info("ID: ("+identifier+").");
     	
-    	Vorgang suche = vorgangsdatenbank.findOne(identifier);
+    	Vorgang suche = vorgangsdatenbank.findById(identifier).orElse(null);
     	if (suche != null)
     	{
     		logger.info("Vorgang found ("+identifier+").");
@@ -70,7 +70,7 @@ public class HelloController {
     	
     	logger.info("ID: ("+identifier+").");
     	
-    	Vorgang suche = vorgangsdatenbank.findOne(identifier);
+    	Vorgang suche = vorgangsdatenbank.findById(identifier).orElse(null);
     	if (suche != null)
     	{
     		logger.info("Vorgang found ("+identifier+").");
