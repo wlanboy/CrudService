@@ -36,6 +36,7 @@ public class HelloController {
 		Vorgang vorgang = new Vorgang();
 		vorgang.setName(parameters.getTarget());
 		vorgang.setStatus(parameters.getStatus());
+		vorgang.setMap(parameters.getMap());
 		
 		vorgang = vorgangsdatenbank.save(vorgang);
     	
@@ -75,7 +76,8 @@ public class HelloController {
     	{
     		logger.info("Vorgang found ("+identifier+").");
     		suche.setName(parameters.getTarget());
-    		suche.setStatus(parameters.getStatus());
+			suche.setStatus(parameters.getStatus());
+			suche.setMap(parameters.getMap());
     		suche = vorgangsdatenbank.save(suche);
     		
     		HelloParameters updatedparameters = new HelloParameters(suche);
