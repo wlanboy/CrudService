@@ -17,10 +17,13 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -31,6 +34,8 @@ import com.wlanboy.demo.model.HelloParameters;
 import com.wlanboy.demo.model.SimpleObject;
 import com.wlanboy.demo.service.MapsService;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class MapControllerTest {
 
     private MockMvc mockMvc;

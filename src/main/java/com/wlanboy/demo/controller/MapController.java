@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class MapController {
     MapsService mapsdatenbank;
     
     @RequestMapping(value = "/map", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('SIMPLEOBJECT')")
     public HttpEntity<HelloParameterMap> hello(@RequestBody HelloParameterMap map) {
     	
 		SimpleObject object = new SimpleObject();
@@ -50,6 +52,7 @@ public class MapController {
     }   
     
     @RequestMapping(value = "/map/{identifier}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('SIMPLEOBJECT')")
     public HttpEntity<HelloParameterMap> objectgetbyid(@PathVariable(value="identifier") Long identifier) {
     	
     	logger.info("ID: ("+identifier+").");
@@ -69,6 +72,7 @@ public class MapController {
     }  
     
     @RequestMapping(value = "/map/{identifier}", method = RequestMethod.PUT)
+    @PreAuthorize("hasRole('MODOBJECT')")
     public HttpEntity<HelloParameterMap> helloupdateid(@PathVariable(value="identifier") Long identifier, @RequestBody HelloParameterMap parameters) {
     	
     	logger.info("ID: ("+identifier+").");
@@ -90,6 +94,7 @@ public class MapController {
     }
     
     @RequestMapping(value = "/map/{identifier}", method = RequestMethod.DELETE)
+    @PreAuthorize("hasAnyRole('MODOBJECT')")
     public HttpEntity<HelloParameterMap> hellodeleteid(@PathVariable(value="identifier") Long identifier) {
     	
     	logger.info("ID: ("+identifier+").");
@@ -109,6 +114,7 @@ public class MapController {
     }     
     
     @RequestMapping(value = "/map", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('SIMPLEOBJECT')")
     public HttpEntity<List<HelloParameterMap>> helloall() {
     	
     	Iterable<SimpleObject> iterable = mapsdatenbank.findAllObjects();
