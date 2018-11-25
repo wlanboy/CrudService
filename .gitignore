@@ -17,3 +17,4 @@ testdb.mv.db
 crudservice.log
 restdb.h2.mv.db
 .factorypath
+.classpath
