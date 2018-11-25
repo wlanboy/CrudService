@@ -28,4 +28,9 @@ public class HelloParameters extends ResourceSupport {
 		this.status = status;
 	}
 
+	public HelloParameters(String target, String status) {
+		this.target = target;
+		this.status = status;
+	}
+
 }
