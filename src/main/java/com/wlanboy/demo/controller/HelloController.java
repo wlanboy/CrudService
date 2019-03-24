@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wlanboy.demo.model.HelloParameters;
 import com.wlanboy.demo.model.Vorgang;
-import com.wlanboy.demo.repository.VorgangRepository;
+import com.wlanboy.demo.service.VorgangsService;
 
 @RestController
 public class HelloController {
@@ -28,7 +28,7 @@ public class HelloController {
             .getLogger(HelloController.class.getCanonicalName());
 
     @Autowired
-    VorgangRepository vorgangsdatenbank;
+    VorgangsService vorgangsdatenbank;
     
     @RequestMapping(value = "/hello", method = RequestMethod.POST)
     public HttpEntity<HelloParameters> hello(@RequestBody HelloParameters parameters) {
@@ -36,14 +36,22 @@ public class HelloController {
 		Vorgang vorgang = new Vorgang();
 		vorgang.setName(parameters.getTarget());
 		vorgang.setStatus(parameters.getStatus());
-		vorgang.setMap(parameters.getMap());
 		
-		vorgang = vorgangsdatenbank.save(vorgang);
+		HttpStatus status = HttpStatus.CREATED;
+    	Vorgang suche = vorgangsdatenbank.searchVorgangByNameAndStatus(vorgang);
+    	if (suche != null)
+    	{
+    		status = HttpStatus.CONFLICT;
+    	}
+    	else {
+    		vorgang = vorgangsdatenbank.SaveVorgang(vorgang);
+        	
+        	parameters = new HelloParameters(vorgang);
+        	parameters.add(linkTo(methodOn(HelloController.class).hellogetbyid(parameters.getIdentifier())).withSelfRel());
+            logger.info("Vorgang created.");
+    	}
     	
-    	parameters = new HelloParameters(vorgang);
-    	parameters.add(linkTo(methodOn(HelloController.class).hellogetbyid(parameters.getIdentifier())).withSelfRel());
-        logger.info("Vorgang created.");
-        return new ResponseEntity<HelloParameters>(parameters, HttpStatus.OK);
+    	return new ResponseEntity<HelloParameters>(parameters, status);
     }   
     
     @RequestMapping(value = "/hello/{identifier}", method = RequestMethod.GET)
@@ -51,7 +59,7 @@ public class HelloController {
     	
     	logger.info("ID: ("+identifier+").");
     	
-    	Vorgang suche = vorgangsdatenbank.findById(identifier).orElse(null);
+    	Vorgang suche = vorgangsdatenbank.searchVorgangById(identifier);
     	if (suche != null)
     	{
     		logger.info("Vorgang found ("+identifier+").");
@@ -66,23 +74,41 @@ public class HelloController {
 
     }  
     
-    @RequestMapping(value = "/hello/{identifier}", method = RequestMethod.POST)
+    @RequestMapping(value = "/hello/{identifier}", method = RequestMethod.PUT)
     public HttpEntity<HelloParameters> helloupdateid(@PathVariable(value="identifier") Long identifier, @RequestBody HelloParameters parameters) {
     	
     	logger.info("ID: ("+identifier+").");
     	
-    	Vorgang suche = vorgangsdatenbank.findById(identifier).orElse(null);
+    	Vorgang suche = vorgangsdatenbank.searchVorgangById(identifier);
     	if (suche != null)
     	{
     		logger.info("Vorgang found ("+identifier+").");
     		suche.setName(parameters.getTarget());
 			suche.setStatus(parameters.getStatus());
-			suche.setMap(parameters.getMap());
-    		suche = vorgangsdatenbank.save(suche);
+    		suche = vorgangsdatenbank.SaveVorgang(suche);
     		
     		HelloParameters updatedparameters = new HelloParameters(suche);
     		updatedparameters.add(linkTo(methodOn(HelloController.class).hellogetbyid(updatedparameters.getIdentifier())).withSelfRel());
     		return new ResponseEntity<HelloParameters>(updatedparameters, HttpStatus.OK);
+    	}
+    	else {
+    		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    	}
+
+    }
+    
+    @RequestMapping(value = "/hello/{identifier}", method = RequestMethod.DELETE)
+    public HttpEntity<HelloParameters> hellodeleteid(@PathVariable(value="identifier") Long identifier) {
+    	
+    	logger.info("ID: ("+identifier+").");
+    	
+    	Vorgang suche = vorgangsdatenbank.searchVorgangById(identifier);
+    	if (suche != null)
+    	{
+    		vorgangsdatenbank.deleteVorgang(identifier);
+    		logger.info("Vorgang deleted with ("+identifier+").");
+
+    		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     	}
     	else {
     		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -93,7 +119,7 @@ public class HelloController {
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public HttpEntity<List<HelloParameters>> helloall() {
     	
-    	Iterable<Vorgang> iterable = vorgangsdatenbank.findAll();
+    	Iterable<Vorgang> iterable = vorgangsdatenbank.findAllVorgaenge();
         List<HelloParameters> list = new ArrayList<HelloParameters>();
 
         iterable.forEach((v)->  {

@@ -1,32 +1,49 @@
 package com.wlanboy.demo.model;
 
-import javax.persistence.Column;
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.google.common.hash.Hashing;
+
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "SimpleObject")
 public class SimpleObject {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter
-	@Setter
 	public Long SIMPLE_ID;
 
-	@Column(nullable = false, length = 60)
-	@Getter
-	@Setter
 	public String SIMPLE_NUMBER;
-
-	@Column(nullable = false, length = 60)
-	@Getter
-	@Setter
 	public String SIMPLE_HASH;
+
+	public SimpleObject(long id, String number, String hash) {
+		this.SIMPLE_ID = id;
+		this.SIMPLE_NUMBER = number;
+		this.SIMPLE_HASH = hash;
+	}
+
+	public SimpleObject(String number, String hash) {
+		this.SIMPLE_NUMBER = number;
+		this.SIMPLE_HASH = hash;
+	}
+
+	public SimpleObject() {
+	}
+
+	public void calculateHash() throws NoSuchAlgorithmException {
+		if (this.SIMPLE_NUMBER == null)
+			this.SIMPLE_NUMBER = "";
+
+		this.SIMPLE_HASH = Hashing.sha256().hashString(this.SIMPLE_NUMBER, StandardCharsets.UTF_8).toString();
+		;
+	}
 }
