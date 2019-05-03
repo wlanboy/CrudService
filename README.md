@@ -24,7 +24,7 @@ docker build -t crudservice:latest . --build-arg JAR_FILE=./target/CrudService-0
 
 ## Docker run
 export DOCKERHOST=192.168.0.100
-docker run --name crudservice -d -p 8002:8002 -v /tmp:/tmp -e EUREKA_ZONE=http://$DOCKERHOST:8761/eureka/ crudservice:latest
+docker run --name crudservice -m 256M -d -p 8002:8002 -v /tmp:/tmp -e DOCKERHOST=$DOCKERHOST -e EUREKA_ZONE=http://$DOCKERHOST:8761/eureka/ crudservice:latest
 
 ## Link to H2 web console
 http://127.0.0.1:8002/h2
