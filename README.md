@@ -14,16 +14,17 @@ Default value: http://127.0.0.1:8761/eureka/
 Defining all available Eureka Instances.
 
 ### Windows
-java -jar target\CrudService-0.0.1-SNAPSHOT.jar
+java -jar target\CrudService-0.1.1-SNAPSHOT.jar
 
 ### Linux (service enabled)
 ./target/CrudService.jar start
 
 ## Docker build
-docker build -t crudservice:latest . --build-arg JAR_FILE=./target/CrudService-0.0.1-SNAPSHOT.jar
+docker build -t crudservice:latest . --build-arg JAR_FILE=./target/CrudService-0.1.1-SNAPSHOT.jar
 
 ## Docker run
-docker run --name crudservice -d -p 8002:8002 --link serviceregistry:serviceregistry -v /tmp:/tmp -e EUREKA_ZONE=$EUREKA_ZONE crudservice:latest
+export DOCKERHOST=192.168.0.100
+docker run --name crudservice -d -p 8002:8002 -v /tmp:/tmp -e EUREKA_ZONE=http://$DOCKERHOST:8761/eureka/ crudservice:latest
 
 ## Link to H2 web console
 http://127.0.0.1:8002/h2
