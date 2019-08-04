@@ -8,7 +8,7 @@ import com.wlanboy.demo.model.HelloParameters;
 
 import feign.Headers;
 
-@FeignClient(name = "mirrorservice", fallbackFactory = MirrorClientFallbackFactory.class)
+@FeignClient(name = "mirrorservice", url = "http://mirrorservice:8080", fallbackFactory = MirrorClientFallbackFactory.class)
 public interface MirrorClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/mirror")
