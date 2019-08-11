@@ -1,7 +1,7 @@
 pipeline {
   agent any
   options {
-    buildDiscarder(logRotator(numToKeepStr: '7'))
+    buildDiscarder(logRotator(numToKeepStr: '1'))
   }
   environment {
     LOGSTASH = "nuc:5044"
