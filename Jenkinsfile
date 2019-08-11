@@ -4,7 +4,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '1'))
   }
   environment {
-    LOGSTASH = "nuc:5044"
+    LOGSTASH = 'nuc:5044'
   }  
   stages {
     stage('Git') {
