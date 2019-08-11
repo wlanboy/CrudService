@@ -1,5 +1,11 @@
 pipeline {
   agent any
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '7'))
+  }
+  environment {
+    LOGSTASH = "nuc:5044"
+  }  
   stages {
     stage('Git') {
       steps {
