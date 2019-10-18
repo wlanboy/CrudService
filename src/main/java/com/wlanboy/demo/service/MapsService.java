@@ -17,18 +17,16 @@ public class MapsService {
     SimpleObjectRepository simpledatenbank;
 
 	public SimpleObject searchObjectById(Long identifier) {
-		SimpleObject suche = simpledatenbank.findById(identifier).orElse(null);
-		return suche;
+		return simpledatenbank.findById(identifier).orElse(null);
 	}
 
-	public SimpleObject SaveObject(SimpleObject object) {
+	public SimpleObject saveObject(SimpleObject object) {
 			String sha256hex = Hashing.sha256()
 					  .hashString(object.getSIMPLE_NUMBER(), StandardCharsets.UTF_8)
 					  .toString();
 			object.setSIMPLE_HASH(sha256hex);
 
-		SimpleObject save = simpledatenbank.save(object);
-		return save;
+		return simpledatenbank.save(object);
 	}
 
 	public Iterable<SimpleObject> findAllObjects() {

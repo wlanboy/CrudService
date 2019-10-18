@@ -24,10 +24,7 @@ public class BasicWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdap
 	
 	@Value("${usermodpassword}")
 	String usermodpassword;
-	
-	//@Autowired
-    //private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
-	
+		
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().
