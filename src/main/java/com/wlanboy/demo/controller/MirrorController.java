@@ -1,14 +1,13 @@
 package com.wlanboy.demo.controller;
 
-import java.util.logging.Logger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wlanboy.demo.clients.MirrorClient;
@@ -17,17 +16,17 @@ import com.wlanboy.demo.model.HelloParameters;
 @RestController
 public class MirrorController {
 
-	private static final Logger logger = Logger.getLogger(MirrorController.class.getCanonicalName());
+	private static final Logger logger = LoggerFactory.getLogger(MirrorController.class);
 
 	@Autowired
 	MirrorClient mirrorClient;
 
-	@RequestMapping(value = "/mirror", method = RequestMethod.POST)
+	@PostMapping(value = "/mirror")
 	public HttpEntity<HelloParameters> hello(@RequestBody HelloParameters parameters) {
 
 		parameters = mirrorClient.postMirrorRequest(parameters);
-		logger.info("Vorgang created.");
+		logger.info("Mirror Request {}", parameters);
 
-		return new ResponseEntity<HelloParameters>(parameters, HttpStatus.CREATED);
+		return new ResponseEntity<>(parameters, HttpStatus.CREATED);
 	}
 }

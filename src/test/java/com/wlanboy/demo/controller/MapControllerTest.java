@@ -117,7 +117,7 @@ public class MapControllerTest {
         HelloParameterMap testrequest = new HelloParameterMap(id, HashTest.teststring,HashTest.hashstring);
         
         when(mapsService.searchSimpleObjectByNameOrValue(testdata)).thenReturn(null);
-        when(mapsService.SaveObject(testdata)).thenReturn(testdatadb);
+        when(mapsService.saveObject(testdata)).thenReturn(testdatadb);
         
         mockMvc.perform(
         		 
@@ -130,7 +130,7 @@ public class MapControllerTest {
                 .andExpect(jsonPath("$.hash").value(HashTest.hashstring));                
         
         verify(mapsService, times(1)).searchSimpleObjectByNameOrValue(testdata);
-        verify(mapsService, times(1)).SaveObject(testdata);
+        verify(mapsService, times(1)).saveObject(testdata);
         verifyNoMoreInteractions(mapsService);
     }
     
@@ -161,7 +161,7 @@ public class MapControllerTest {
         HelloParameterMap testrequest = new HelloParameterMap(id, HashTest.teststring,HashTest.hashstring);
         
         when(mapsService.searchObjectById(id)).thenReturn(testdata);
-        when(mapsService.SaveObject(testdata)).thenReturn(testdata);
+        when(mapsService.saveObject(testdata)).thenReturn(testdata);
         
         mockMvc.perform(
         		 
@@ -174,7 +174,7 @@ public class MapControllerTest {
                 .andExpect(jsonPath("$.hash").value(HashTest.hashstring));                
         
         verify(mapsService, times(1)).searchObjectById(id);
-        verify(mapsService, times(1)).SaveObject(testdata);
+        verify(mapsService, times(1)).saveObject(testdata);
         verifyNoMoreInteractions(mapsService);
     }    
     
