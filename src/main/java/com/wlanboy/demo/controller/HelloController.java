@@ -1,8 +1,5 @@
 package com.wlanboy.demo.controller;
 
-import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +45,7 @@ public class HelloController {
 			vorgang = vorgangsdatenbank.SaveVorgang(vorgang);
 
 			parameters = new HelloParameters(vorgang);
-			parameters.add(
-					linkTo(methodOn(HelloController.class).hellogetbyid(parameters.getIdentifier())).withSelfRel());
+
 			logger.info("Vorgang created.");
 		}
 
@@ -64,8 +60,7 @@ public class HelloController {
 			logger.info("Vorgang found ( {})",identifier);
 
 			HelloParameters parameters = new HelloParameters(suche);
-			parameters.add(
-					linkTo(methodOn(HelloController.class).hellogetbyid(parameters.getIdentifier())).withSelfRel());
+
 			return new ResponseEntity<>(parameters, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -86,9 +81,7 @@ public class HelloController {
 			suche = vorgangsdatenbank.SaveVorgang(suche);
 
 			HelloParameters updatedparameters = new HelloParameters(suche);
-			updatedparameters
-					.add(linkTo(methodOn(HelloController.class).hellogetbyid(updatedparameters.getIdentifier()))
-							.withSelfRel());
+
 			return new ResponseEntity<>(updatedparameters, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -119,8 +112,6 @@ public class HelloController {
 
 		iterable.forEach((v) -> {
 			HelloParameters foundparameters = new HelloParameters(v);
-			foundparameters.add(linkTo(methodOn(HelloController.class).hellogetbyid(foundparameters.getIdentifier()))
-					.withSelfRel());
 			list.add(foundparameters);
 		});
 

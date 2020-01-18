@@ -1,11 +1,11 @@
 package com.wlanboy.demo.model;
 
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HelloParameters extends ResourceSupport {
+public class HelloParameters extends RepresentationModel<HelloParameters> {
 
 	public Long getIdentifier() {
 		return identifier;
