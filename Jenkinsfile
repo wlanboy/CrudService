@@ -23,6 +23,11 @@ pipeline {
         sh 'mvn clean package -Dmaven.test.failure.ignore=true'
       }
     }
+    stage('Container') {
+      steps {
+        sh 'docker build -t crudservice:latest . --build-arg JAR_FILE=./target/crudservice-0.1.1-SNAPSHOT.jar'
+      }
+    }
     stage('Publish') {
       when { expression { params.PUBLISHIMAGE == true } }
       steps {
