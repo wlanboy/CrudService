@@ -1,3 +1,5 @@
+![Java CI with Maven](https://github.com/wlanboy/CrudService/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
+
 # CrudService
 Spring Based CRUD Hateos Rest Service using Service Registry, Cloud Config and Zipkin
 
