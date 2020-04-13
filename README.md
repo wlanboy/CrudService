@@ -1,10 +1,10 @@
 ![Java CI with Maven](https://github.com/wlanboy/CrudService/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
 
 # CrudService
-Spring Based CRUD Hateos Rest Service using Service Registry, Cloud Config and Zipkin
+Spring Based CRUD Hateos Rest Service using Cloud Config and H2
 
 ## Dependencies
-At least: Java 8 and Maven 3.5
+At least: Java 11 and Maven 3.5
 
 ## Build 
 mvn package -DskipTests=true
