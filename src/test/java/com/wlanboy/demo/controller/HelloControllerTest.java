@@ -17,9 +17,11 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -29,6 +31,7 @@ import com.wlanboy.demo.model.HelloParameters;
 import com.wlanboy.demo.model.Vorgang;
 import com.wlanboy.demo.service.VorgangsService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class HelloControllerTest {
 
     private MockMvc mockMvc;
@@ -59,7 +62,7 @@ public class HelloControllerTest {
         
         mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].identifier").value(1))
                 .andExpect(jsonPath("$[0].target").value("Test1"))
@@ -80,7 +83,7 @@ public class HelloControllerTest {
         
         mockMvc.perform(get("/hello/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.identifier").value(id))
                 .andExpect(jsonPath("$.target").value("Test1"))
                 .andExpect(jsonPath("$.status").value("ok"));
@@ -114,11 +117,14 @@ public class HelloControllerTest {
         when(vorgangsService.SaveVorgang(testdata)).thenReturn(testdatadb);
         //doNothing().when(vorgangsService).create(user);
         
+        String contentstring = objectMapper.writeValueAsString(testrequest);
+        
         mockMvc.perform(
-        		 
-                post("/hello")
+        		
+                post("/hello",testrequest)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(testrequest)))
+                        .content(contentstring))
+        
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.identifier").value(id))
                 .andExpect(jsonPath("$.target").value("Test1"))
@@ -138,11 +144,13 @@ public class HelloControllerTest {
         
         when(vorgangsService.searchVorgangByNameAndStatus(testdata)).thenReturn(testdatadb);
         
+        String contentstring = objectMapper.writeValueAsString(testrequest);
+        
         mockMvc.perform(
         		 
                 post("/hello")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(testrequest)))
+                        .content(contentstring))
                 .andExpect(status().isConflict());
         
         verify(vorgangsService, times(1)).searchVorgangByNameAndStatus(testdata);

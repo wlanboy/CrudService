@@ -21,9 +21,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -34,8 +33,7 @@ import com.wlanboy.demo.model.HelloParameters;
 import com.wlanboy.demo.model.SimpleObject;
 import com.wlanboy.demo.service.MapsService;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 public class MapControllerTest {
 
     private MockMvc mockMvc;
@@ -66,7 +64,7 @@ public class MapControllerTest {
         
         mockMvc.perform(get("/map"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].value").value(HashTest.teststring))
@@ -87,7 +85,7 @@ public class MapControllerTest {
         
         mockMvc.perform(get("/map/"+id))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.value").value(HashTest.teststring))
                 .andExpect(jsonPath("$.hash").value(HashTest.hashstring));

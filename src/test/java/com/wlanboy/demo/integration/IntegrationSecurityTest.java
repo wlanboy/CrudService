@@ -75,7 +75,7 @@ public class IntegrationSecurityTest {
         
         mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
     
     @Test
@@ -101,7 +101,7 @@ public class IntegrationSecurityTest {
         
         mockMvc.perform(get("/map"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
     
     @Test
