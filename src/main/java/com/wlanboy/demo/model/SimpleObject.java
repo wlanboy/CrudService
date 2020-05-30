@@ -67,4 +67,42 @@ public class SimpleObject {
 		this.SIMPLE_HASH = Hashing.sha256().hashString(this.SIMPLE_NUMBER, StandardCharsets.UTF_8).toString();
 		;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((SIMPLE_HASH == null) ? 0 : SIMPLE_HASH.hashCode());
+		result = prime * result + ((SIMPLE_ID == null) ? 0 : SIMPLE_ID.hashCode());
+		result = prime * result + ((SIMPLE_NUMBER == null) ? 0 : SIMPLE_NUMBER.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SimpleObject other = (SimpleObject) obj;
+		if (SIMPLE_HASH == null) {
+			if (other.SIMPLE_HASH != null)
+				return false;
+		} else if (!SIMPLE_HASH.equals(other.SIMPLE_HASH))
+			return false;
+		if (SIMPLE_ID == null) {
+			if (other.SIMPLE_ID != null)
+				return false;
+		} else if (!SIMPLE_ID.equals(other.SIMPLE_ID))
+			return false;
+		if (SIMPLE_NUMBER == null) {
+			if (other.SIMPLE_NUMBER != null)
+				return false;
+		} else if (!SIMPLE_NUMBER.equals(other.SIMPLE_NUMBER))
+			return false;
+		return true;
+	}
+	
 }

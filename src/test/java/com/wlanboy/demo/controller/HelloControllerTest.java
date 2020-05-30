@@ -22,6 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -32,6 +33,7 @@ import com.wlanboy.demo.model.Vorgang;
 import com.wlanboy.demo.service.VorgangsService;
 
 @RunWith(MockitoJUnitRunner.class)
+@AutoConfigureMockMvc
 public class HelloControllerTest {
 
     private MockMvc mockMvc;
@@ -40,7 +42,7 @@ public class HelloControllerTest {
     private VorgangsService vorgangsService;
 
     @InjectMocks
-    private HelloController helloController;
+    private HelloController helloController = new HelloController();
     
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -110,7 +112,7 @@ public class HelloControllerTest {
     	long id = 1;
         Vorgang testdatadb = new Vorgang(id, "Test1","ok");
         Vorgang testdata = new Vorgang("Test1","ok");
-        HelloParameters testrequest = new HelloParameters(id, "Test1","ok");
+        HelloParameters testrequest = new HelloParameters("Test1","ok");
         
         when(vorgangsService.searchVorgangById(id)).thenReturn(null);
         when(vorgangsService.searchVorgangByNameAndStatus(testdata)).thenReturn(null);
@@ -137,10 +139,10 @@ public class HelloControllerTest {
     
     @Test
     public void test_create_hello_conflict() throws Exception {
-    	long id = 1;
-        Vorgang testdatadb = new Vorgang(id, "Test1","ok");
-        Vorgang testdata = new Vorgang("Test1","ok");
-        HelloParameters testrequest = new HelloParameters(id, "Test1","ok");
+    	long id = 9;
+        Vorgang testdatadb = new Vorgang(id, "Test9","ok");
+        Vorgang testdata = new Vorgang("Test9","ok");
+        HelloParameters testrequest = new HelloParameters("Test9","ok");
         
         when(vorgangsService.searchVorgangByNameAndStatus(testdata)).thenReturn(testdatadb);
         
@@ -183,14 +185,14 @@ public class HelloControllerTest {
     
     @Test
     public void test_update_hello_404() throws Exception {
-    	long id = 1;
-        HelloParameters testrequest = new HelloParameters(id, "Test1","ok");
+    	long id = 5;
+        HelloParameters testrequest = new HelloParameters(id, "Test5","ok");
         
         when(vorgangsService.searchVorgangById(id)).thenReturn(null);
         
         mockMvc.perform(
         		 
-                put("/hello/1")
+                put("/hello/5")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(testrequest)))
                 .andExpect(status().isNotFound());                
@@ -201,13 +203,13 @@ public class HelloControllerTest {
  
     @Test
     public void test_delete_hello_success() throws Exception {
-    	long id = 1;
-    	Vorgang testdata = new Vorgang(id, "Test1","ok");
+    	long id = 3;
+    	Vorgang testdata = new Vorgang(id, "Test3","ok");
         when(vorgangsService.searchVorgangById(id)).thenReturn(testdata);
         //doNothing(vorgangsService.deleteVorgang(id));
         
         mockMvc.perform(
-                delete("/hello/1")
+                delete("/hello/3")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());                
         
@@ -218,11 +220,11 @@ public class HelloControllerTest {
     
     @Test
     public void test_delete_hello_404() throws Exception {
-    	long id = 1;
+    	long id = 11;
         when(vorgangsService.searchVorgangById(id)).thenReturn(null);
         
         mockMvc.perform(
-                delete("/hello/1")
+                delete("/hello/11")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());                
         

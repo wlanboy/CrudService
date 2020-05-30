@@ -109,10 +109,10 @@ public class MapControllerTest {
     
     @Test
     public void test_create_map_success() throws Exception {
-    	long id = 1;
+    	long id = 9;
         SimpleObject testdatadb = new SimpleObject(id, HashTest.teststring,HashTest.hashstring);
-        SimpleObject testdata = new SimpleObject(HashTest.teststring,null);
-        HelloParameterMap testrequest = new HelloParameterMap(id, HashTest.teststring,HashTest.hashstring);
+        SimpleObject testdata = new SimpleObject(HashTest.teststring,HashTest.hashstring);
+        HelloParameterMap testrequest = new HelloParameterMap(HashTest.teststring, null);
         
         when(mapsService.searchSimpleObjectByNameOrValue(testdata)).thenReturn(null);
         when(mapsService.saveObject(testdata)).thenReturn(testdatadb);
@@ -134,9 +134,9 @@ public class MapControllerTest {
     
     @Test
     public void test_create_map_conflict() throws Exception {
-    	long id = 1;
+    	long id = 5;
         SimpleObject testdatadb = new SimpleObject(id, HashTest.teststring,HashTest.hashstring);
-        SimpleObject testdata = new SimpleObject(HashTest.teststring,null);
+        SimpleObject testdata = new SimpleObject(HashTest.teststring,HashTest.hashstring);
         HelloParameterMap testrequest = new HelloParameterMap(HashTest.teststring,HashTest.hashstring);
         
         when(mapsService.searchSimpleObjectByNameOrValue(testdata)).thenReturn(testdatadb);

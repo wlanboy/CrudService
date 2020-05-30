@@ -42,22 +42,28 @@ public class MapController {
 		try {
 			object.setSIMPLE_NUMBER(map.getValue());
 			object.calculateHash();
+			
+			SimpleObject suche = mapsdatenbank.searchSimpleObjectByNameOrValue(object);
 
-			object = mapsdatenbank.saveObject(object);
+			if (suche != null) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			} else {
+				object = mapsdatenbank.saveObject(object);
+			}
 
 		} catch (NoSuchAlgorithmException e) {
 			logger.error("createMap Exception {}", e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 
-		if (object != null) {
+		if (object == null) {
 			return ResponseEntity.notFound().build();
 		} else {
 			dbMap = new HelloParameterMap(object);
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dbMap.getId())
 					.toUri();
 			logger.info("Map created {} ", dbMap);
-			return ResponseEntity.created(uri).body(map);
+			return ResponseEntity.created(uri).body(dbMap);
 		}
 
 	}
