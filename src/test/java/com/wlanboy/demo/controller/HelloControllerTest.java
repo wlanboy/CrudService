@@ -114,10 +114,8 @@ public class HelloControllerTest {
         Vorgang testdata = new Vorgang("Test1","ok");
         HelloParameters testrequest = new HelloParameters("Test1","ok");
         
-        when(vorgangsService.searchVorgangById(id)).thenReturn(null);
         when(vorgangsService.searchVorgangByNameAndStatus(testdata)).thenReturn(null);
         when(vorgangsService.SaveVorgang(testdata)).thenReturn(testdatadb);
-        //doNothing().when(vorgangsService).create(user);
         
         String contentstring = objectMapper.writeValueAsString(testrequest);
         
