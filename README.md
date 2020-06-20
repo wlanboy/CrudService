@@ -21,6 +21,13 @@ java -jar target\crudservice-0.1.1-SNAPSHOT.jar
 ## Docker build
 docker build -t crudservice:latest . --build-arg JAR_FILE=./target/crudservice-0.1.1-SNAPSHOT.jar
 
+## Docker publish to github registry
+- docker tag serviceconfig:latest docker.pkg.github.com/wlanboy/crudservice/crudservice:latest
+- docker push docker.pkg.github.com/wlanboy/crudservice/crudservice:latest
+
+## Docker Registry repro
+- https://github.com/wlanboy/CrudService/packages/278494
+
 ## Docker run
 docker run --name crudservice -m 256M -d -p 8002:8002 -v /tmp:/tmp crudservice:latest
 
