@@ -12,9 +12,10 @@
 	<description>CRUD REST Service using Spring Boot, Spring Cloud, Zipkin and H2 database.</description>
 
 	<parent>
+	    <!--https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent-->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.7.RELEASE</version>
+		<version>2.3.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -22,7 +23,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>11</java.version>
-		<spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+		<!--https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies-->
+		<spring-cloud.version>Hoxton.SR5</spring-cloud.version>
 		<cucumber.version>1.2.6</cucumber.version>
 		<cglib.version>3.3.0</cglib.version>
 		<logstash-logback.version>6.3</logstash-logback.version>
