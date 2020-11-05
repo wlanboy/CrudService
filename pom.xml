@@ -31,6 +31,7 @@
 		<docker.image.prefix>wlanboy</docker.image.prefix>	
 		<dockerfile.version>1.4.10</dockerfile.version>
 		<!--<swagger.version>2.9.2</swagger.version>-->
+		<guava.version>30.0-jre</guava.version>
 	</properties>
 
 	<dependencyManagement>
@@ -95,7 +96,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>28.2-jre</version>
+			<version>${guava.version}</version>
 		</dependency>
 
 		<dependency>
