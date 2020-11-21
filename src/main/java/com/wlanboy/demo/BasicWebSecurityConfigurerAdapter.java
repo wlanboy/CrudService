@@ -31,7 +31,7 @@ public class BasicWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdap
         realmName("wlanboy-crudservice").
         and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
         and().csrf().disable().
-        authorizeRequests().antMatchers("/actuator/*").permitAll().and().
+        authorizeRequests().antMatchers("/actuator/**").permitAll().and().
         authorizeRequests().antMatchers("/hello/**").permitAll().anyRequest().authenticated();
 
     }
