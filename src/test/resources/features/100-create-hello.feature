@@ -1,5 +1,6 @@
 Feature: Create hello
 
+  @inwork
   Scenario: create hello object
 
     Given I call POST "http://localhost:8002/hello" with the following attributes
