@@ -33,3 +33,6 @@ docker run --name crudservice -m 256M -d -p 8002:8002 -v /tmp:/tmp crudservice:l
 
 ## Link to H2 web console
 http://127.0.0.1:8002/h2
+
+## Link to OpenApi doc
+http://localhost:8002/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config

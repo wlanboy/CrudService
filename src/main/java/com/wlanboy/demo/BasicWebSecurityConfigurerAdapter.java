@@ -32,6 +32,7 @@ public class BasicWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdap
         and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
         and().csrf().disable().
         authorizeRequests().antMatchers("/actuator/**").permitAll().and().
+        authorizeRequests().antMatchers("/swagger-ui/**").permitAll().and().
         authorizeRequests().antMatchers("/hello/**").permitAll().anyRequest().authenticated();
 
     }
