@@ -17,12 +17,12 @@ jobs:
       
     - uses: actions/checkout@master
     - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
       env:
-         JAR_FILE: target/crudservice-0.1.1-SNAPSHOT.jar
-      with:
-        name: wlanboy/crudservice
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: "latest"
-        buildargs: JAR_FILE
+        DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+    - name: Build the Docker image
+      run: docker build -t wlanboy/crudservice:latest . --build-arg JAR_FILE=./target/crudservice-0.1.1-SNAPSHOT.jar 
+    - name: Docker Push
+      run: docker push wlanboy/crudservice:latest
