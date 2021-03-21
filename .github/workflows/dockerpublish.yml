@@ -19,7 +19,7 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       env:
-         JAR_FILE: ./target/crudservice-0.1.1-SNAPSHOT.jar
+         JAR_FILE: /github/workspace/target/crudservice-0.1.1-SNAPSHOT.jar
       with:
         name: wlanboy/crudservice
         username: ${{ secrets.DOCKER_USERNAME }}
