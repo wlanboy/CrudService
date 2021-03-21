@@ -16,7 +16,7 @@ mvn package -DskipTests=true
 java -jar target\crudservice-0.1.1-SNAPSHOT.jar
 
 ### Linux (service enabled)
-./target/crudservice.jar start
+./target/crudservice-0.1.1-SNAPSHOT.jar start
 
 ## Docker build
 docker build -t crudservice:latest . --build-arg JAR_FILE=./target/crudservice-0.1.1-SNAPSHOT.jar
