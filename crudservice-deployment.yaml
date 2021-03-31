@@ -29,7 +29,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: crudservice
-  name: crudservice
+  name: crudservice-service
 spec:
   ports:
   - name: 8002-8002
