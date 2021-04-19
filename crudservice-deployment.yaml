@@ -21,6 +21,7 @@ spec:
       containers:
       - image: wlanboy/crudservice
         name: crudservice
+        imagePullPolicy: Always
         ports:
         - containerPort: 8002
         resources: {}
