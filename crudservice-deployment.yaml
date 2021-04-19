@@ -46,5 +46,3 @@ spec:
   type: ClusterIP
 #  type: LoadBalancer
 #  type: NodePort
-  status:
-  loadBalancer: {}
