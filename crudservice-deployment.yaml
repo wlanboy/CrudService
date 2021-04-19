@@ -43,4 +43,8 @@ spec:
     port: 8002
     protocol: TCP
     targetPort: 8002
-  type: LoadBalancer
+  type: ClusterIP
+#  type: LoadBalancer
+#  type: NodePort
+  status:
+  loadBalancer: {}
