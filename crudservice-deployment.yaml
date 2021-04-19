@@ -5,6 +5,7 @@ metadata:
   labels:
     app: crudservice
   name: crudservice
+  namespace: crud
 spec:
   replicas: 1
   selector:
@@ -32,6 +33,7 @@ metadata:
   labels:
     app: crudservice-service
   name: crudservice-service
+  namespace: crud
 spec:
   selector:
     app: crudservice
