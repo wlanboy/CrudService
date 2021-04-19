@@ -20,6 +20,8 @@ spec:
       containers:
       - image: wlanboy/crudservice
         name: crudservice
+        ports:
+        - containerPort: 8002
         resources: {}
 status: {}
 ---
@@ -28,16 +30,14 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: crudservice
+    app: crudservice-service
   name: crudservice-service
 spec:
+  selector:
+    app: crudservice
   ports:
   - name: 8002-8002
     port: 8002
     protocol: TCP
     targetPort: 8002
-  selector:
-    app: crudservice
-  type: ClusterIP
-status:
-  loadBalancer: {}
+  type: LoadBalancer
