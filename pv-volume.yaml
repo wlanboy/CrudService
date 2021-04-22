@@ -4,6 +4,7 @@ metadata:
   name: crudservice-volume
   labels:
     type: local
+  namespace: crud
 spec:
   storageClassName: manual
   capacity:
