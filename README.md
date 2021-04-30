@@ -93,6 +93,12 @@ Events:                   <none>
 {"status":"UP","groups":["liveness","readiness"]}
 ```
 
+### deploy ingress service for crudservice
+```
+kubectl apply -f crudservice-ingress.yml
+kubectl describe ingress crudservice-ingress -n crud
+```
+
 ## Link to H2 web console
 http://127.0.0.1:8002/h2
 
