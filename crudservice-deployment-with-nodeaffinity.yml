@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: crudservice
+  name: crudservice
+  namespace: crud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crudservice
+  strategy: {}
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: servicetype
+            operator: In
+            values:
+            - spring
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: crudservice
+    spec:
+      volumes:
+        - name: crudservicestorage
+          persistentVolumeClaim:
+            claimName: crudservice-pv-claim
+      containers:
+      - image: wlanboy/crudservice
+        name: crudservice
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8002
+        resources: {}
+status: {}
