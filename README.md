@@ -26,7 +26,7 @@ docker build -t crudservice:latest . --build-arg JAR_FILE=./target/crudservice-0
 - docker push docker.pkg.github.com/wlanboy/crudservice/crudservice:latest
 
 ## Docker Hub
-- https://hub.docker.com/repository/docker/wlanboy/crudservice
+- https://hub.docker.com/r/wlanboy/crudservice
 
 ## Docker Registry repro
 - https://github.com/wlanboy/CrudService/packages/278494
