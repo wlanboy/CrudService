@@ -13,13 +13,13 @@ mvn package -DskipTests=true
 ### Environment variables
 
 ### Windows
-java -jar target\crudservice-0.1.1-SNAPSHOT.jar
+java -jar target\crudservice-0.2.1-SNAPSHOT.jar
 
 ### Linux (service enabled)
-./target/crudservice-0.1.1-SNAPSHOT.jar start
+./target/crudservice-0.2.1-SNAPSHOT.jar start
 
 ## Docker build
-docker build -t crudservice:latest . --build-arg JAR_FILE=./target/crudservice-0.1.1-SNAPSHOT.jar
+docker build -t crudservice:latest . --build-arg JAR_FILE=./target/crudservice-0.2.1-SNAPSHOT.jar
 
 ## Docker publish to github registry
 - docker tag serviceconfig:latest docker.pkg.github.com/wlanboy/crudservice/crudservice:latest
