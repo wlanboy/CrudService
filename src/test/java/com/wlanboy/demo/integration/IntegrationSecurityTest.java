@@ -66,6 +66,7 @@ public class IntegrationSecurityTest {
     private MapController mapController;
     
     @Test
+    @WithMockUser(username = "user", password = "user", roles = {"SIMPLEOBJECT"})
     public void test_get_all_hello_success() throws Exception {
         List<Vorgang> testdata = Arrays.asList(
                 new Vorgang(1, "Test1","ok"),
