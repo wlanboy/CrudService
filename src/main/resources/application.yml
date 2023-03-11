@@ -13,5 +13,5 @@ feign:
   hystrix:
     enabled: false
     
-userpassword: "$2a$10$QWiocw4XkxxgyayVzY.kkeFV651Rk2xb821MfpXAUMaXbYo1cH7Vm"
-usermodpassword: "$2a$10$QWiocw4XkxxgyayVzY.kkeFV651Rk2xb821MfpXAUMaXbYo1cH7Vm"
+userpassword: "{bcrypt}$2a$04$lyhlD3qw6EIUVAQcglhirOGj2L2gQMVCOShymNNehBBeUL97UvY4O"
+usermodpassword: "{bcrypt}$2a$04$lyhlD3qw6EIUVAQcglhirOGj2L2gQMVCOShymNNehBBeUL97UvY4O"
