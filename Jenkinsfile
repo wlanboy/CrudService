@@ -25,7 +25,7 @@ pipeline {
     }
     stage('Container') {
       steps {
-        sh 'docker build -t crudservice:latest . --build-arg JAR_FILE=./target/crudservice-0.1.1-SNAPSHOT.jar'
+        sh 'docker build -t crudservice:latest . --build-arg JAR_FILE=./target/crudservice-0.2.1-SNAPSHOT.jar'
       }
     }
     stage('Publish') {
