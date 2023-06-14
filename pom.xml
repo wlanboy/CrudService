@@ -34,7 +34,7 @@
 		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
 		<springdoc-openapi-version>1.6.15</springdoc-openapi-version>
 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-		<guava.version>31.1-jre</guava.version>
+		<guava.version>32.0.0-jre</guava.version>
 		<!-- https://mvnrepository.com/artifact/org.ogce/xpp3 -->
 		<xpp3.version>1.1.6</xpp3.version>
 	</properties>
