@@ -28,18 +28,16 @@ public class BasicWebSecurityConfigurerAdapter {
 		
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-      http
-        .authorizeHttpRequests(requests -> requests
-        .requestMatchers( new AntPathRequestMatcher("/webjars/**")).permitAll()
-        .requestMatchers( new AntPathRequestMatcher("/actuator/**")).permitAll()
-        .requestMatchers( new AntPathRequestMatcher("swagger-ui/**")).permitAll()
-        .requestMatchers( new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
-        .requestMatchers( new AntPathRequestMatcher("v3/api-docs/**")).permitAll()
-        .requestMatchers( new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
-        .anyRequest().authenticated())
-        .httpBasic().realmName("wlanboy-crudservice").
-        and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
-        and().csrf().disable();
+        http
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers(new AntPathRequestMatcher("/webjars/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("swagger-ui/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("v3/api-docs/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
+                        .anyRequest().authenticated())
+                .httpBasic(basic -> basic.realmName("wlanboy-crudservice")).sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).csrf(csrf -> csrf.disable());
       return http.build();
     }
 
